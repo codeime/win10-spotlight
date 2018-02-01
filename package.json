@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "image-info": "0.0.2",
+    "mz": "^2.7.0",
     "node-notifier": "^5.1.2"
   }
 }

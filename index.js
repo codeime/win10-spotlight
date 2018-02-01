@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('mz/fs');
 const path = require('path');
 const imageInfo = require('image-info');
 
@@ -26,52 +26,54 @@ files.forEach(file => {
 	if (stats.isFile()) {
 
 		readFile(path.join(src, file))
-		.then(function(data){
-			/*判断文件后缀*/
-			const tempData = data.slice(0, 7);
-			let filename;
-			if (tempData.indexOf(Buffer.from('FFD8FF', "hex")) != -1) {
+			.then(function (data) {
+				/*判断文件后缀*/
+				const tempData = data.slice(0, 7);
+				let filename;
+				if (tempData.indexOf(Buffer.from('FFD8FF', "hex")) != -1) {
 
-				filename = path.join(target, file + ".jpg");
+					filename = path.join(target, file + ".jpg");
 
-			} else if (tempData.indexOf(Buffer.from('89504E47', 'hex')) != -1) {
+				} else if (tempData.indexOf(Buffer.from('89504E47', 'hex')) != -1) {
 
-				filename = path.join(target, file + ".png");
-			}
+					filename = path.join(target, file + ".png");
+				}
 
-			if (filename) {
+				if (filename) {
 
-				fs.writeFile(filename, data, err=>{
+					fs.writeFile(filename, data, err => {
 
-					if (err) console.log(err);
-					
-					imgInfo(filename)
-					.then(function(data){
-						/*过滤掉小文件*/
-						var wh=data.height/data.width;
-						if(wh==1){
-							fs.unlink(filename,(err)=>{
-								if(err){console.log(err)}
+						if (err) console.log(err);
+
+						imgInfo(filename)
+							.then(function (data) {
+								/*过滤掉小文件*/
+								var wh = data.height / data.width;
+								if (wh == 1) {
+									fs.unlink(filename, (err) => {
+										if (err) {
+											console.log(err)
+										}
+									})
+								}
 							})
-						}
-					})
-					.catch(function(err){
-						console.log(err);
-					})
-				});
-			}
-		})
-		.catch(function(err){
-			console.log(err);
-		})
-		
+							.catch(function (err) {
+								console.log(err);
+							})
+					});
+				}
+			})
+			.catch(function (err) {
+				console.log(err);
+			})
+
 	}
 })
 
-function readFile(path){
-	return new Promise(function(resolve,reject){
-		fs.readFile(path,(err,data)=>{
-			if(err){
+function readFile(path) {
+	return new Promise(function (resolve, reject) {
+		fs.readFile(path, (err, data) => {
+			if (err) {
 				reject(err);
 			}
 			resolve(data);
@@ -79,14 +81,14 @@ function readFile(path){
 	})
 }
 
-function imgInfo(filename){
-	return new Promise(function(resolve,reject){
+function imgInfo(filename) {
+	return new Promise(function (resolve, reject) {
 		imageInfo(filename, (err, info) => {
-			if(err){
+			if (err) {
 				reject(err);
 			}
 			resolve(info);
-			
-		})	
+
+		})
 	})
 }
