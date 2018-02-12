@@ -43,14 +43,11 @@ async function copyFile() {
 
 				filename = path.join(target, file + ".png");
 			}
-			if (filename) {
-
-				await fs.writeFile(filename, data);
-				const info = await imgInfo(filename);
-
+			if (filename) {	
+				const info = await imgInfo(path.join(src, file));
 				var wh = info.height / info.width;
-				if (wh == 1) {
-					await fs.unlink(filename);
+				if (wh != 1&&info.bytes>102400) {
+					await fs.writeFile(filename, data);
 				}
 
 			}
