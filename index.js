@@ -29,7 +29,7 @@ async function checkdir() {
 /*读取源文件目录下的所有文件*/
 async function copyFile() {
 	const files = await fs.readdir(src);
-	files.forEach(async (file) => {
+	files.forEach(async file => {
 		const stats = await fs.stat(path.join(src, file));
 		if (stats.isFile()) {
 			const data = await fs.readFile(path.join(src, file));
