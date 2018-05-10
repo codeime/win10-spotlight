@@ -33,8 +33,8 @@ async function copyFile() {
 		const stats = await fs.stat(path.join(src, file));
 		if (stats.isFile()) {
 			const data = await fs.readFile(path.join(src, file));
-			const tempData = data.slice(0, 7);
 			let filename;
+			const tempData = data.slice(0, 7);
 			if (tempData.indexOf(Buffer.from('FFD8FF', "hex")) != -1) {
 
 				filename = path.join(target, file + ".jpg");

@@ -1,0 +1,1 @@
+CreateObject("WScript.Shell").Run "node index",0
