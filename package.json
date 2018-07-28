@@ -1,16 +1,17 @@
 {
-  "name": "win10spotlight",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "image-info": "0.0.2",
-    "mz": "^2.7.0",
-    "node-notifier": "^5.1.2"
-  }
+    "name": "win10spotlight",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node index",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "image-info": "0.0.2",
+        "mz": "^2.7.0",
+        "node-notifier": "^5.1.2"
+    }
 }
