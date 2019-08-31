@@ -14,8 +14,17 @@ git clone git@github.com:guobing1993/win10-spotlight.git
 ```
 cd win10-spotlight
 ```
+###### 4.安装项目依赖
+使用npm
+```
+npm install
+```
+或者yarn
+```
+yarn install
+```
 
-###### 4.运行项目
+###### 5.运行项目
 ```
 node index
 ```
